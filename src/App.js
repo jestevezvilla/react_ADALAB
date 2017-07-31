@@ -32,6 +32,10 @@ class Board extends Component {
 
   }
 
+  inputChange(e) {
+    console.log(e.value);
+  }
+
   render() {
 
     const renderSquares =
@@ -40,10 +44,21 @@ class Board extends Component {
       );
       
     return (<div>
+      <Search onInputChange={this.inputChange}/>
       {this.state.completed ? <p>Prueba superada</p> : <p>Ya falta poco</p>}
       {renderSquares}
       <Counter completed={this.state.completed} />
     </div>)
+  }
+
+}
+
+class Search extends Component {
+  render(){
+    let inputRef;
+    return(<input
+            ref={(input) => inputRef = input}
+            onChange={()=>this.props.onInputChange(inputRef)} />)
   }
 
 }
@@ -89,7 +104,6 @@ const Square = (props) => {
 
   return (<button onClick={props.onClick}>{props.children}</button>)
 };
-
 
 
 export default App;
