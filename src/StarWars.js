@@ -23,7 +23,7 @@ class StarWars extends Component {
 
   }
 
-  render () {
+  render() {
 
     //let people = this.state.people;
     let {people} = this.state;

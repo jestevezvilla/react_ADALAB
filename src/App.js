@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import './App.css';
 import StarWars from './StarWars';
 import Square from './Square';
+import Counter from './Counter';
 import ControlledForm from './ControlledForm';
 
 const store = {
@@ -52,7 +53,6 @@ class Board extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     
-
   }
 
   render() {
@@ -98,46 +98,6 @@ class Search extends Component {
 
 }
 
-//TODO: Pasar counter como prop
-class Counter extends Component {
-  constructor() {
-    super();
-    this.state = {counter: 0};
-  }
 
-  componentDidMount() {
-    this.start();
-  }
-
-  start() {
-    //let counter = 0
-    this.running =
-      setInterval(() =>
-        //this.setState({counter: counter++}),
-        //this.setState( (prevState, props) => ({counter: prevState.counter + 1})),
-        this.setState(function(prev, props) {
-          return {
-            counter: prev.counter + props.increment
-          };
-        }),
-        1000);
-  }
-
-  stop() {
-    clearInterval(this.running);
-    this.running = null;
-  }
-
-  componentDidUpdate(prev, next) {
-    if (this.props.completed) {
-      this.stop();
-    }
-  }
-
-  render() {
-    return (<span>{this.state.counter}</span>)
-  }
-
-}
 
 export default App;
