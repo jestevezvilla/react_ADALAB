@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 
+//TODO: Importar Promises con namespace
 
 import './App.css';
 import StarWars from './StarWars';
 import Square from './Square';
 import Counter from './Counter';
 import ControlledForm from './ControlledForm';
+import HOC from './HOC';
+//import {HOC} from './HOC';
+//import * as components from './HOC';
 
 const store = {
   board: {
@@ -79,6 +83,7 @@ class Board extends Component {
 
       <Counter completed={this.state.completed} increment={2} />
       <ControlledForm title='Controlled' />
+      <HOC/>
     </div>)
   }
 
