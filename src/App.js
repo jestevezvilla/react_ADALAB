@@ -11,6 +11,8 @@ import HOC from './HOC';
 //import {HOC} from './HOC';
 //import * as components from './HOC';
 
+import ModalShorthand from './Toolkit';
+
 const store = {
   board: {
     squares: [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -73,6 +75,8 @@ class Board extends Component {
       
     return (<div>
       
+      <ModalShorthand />
+
       <Search onInputChange={this.inputChange}/>
 
       {this.state.completed ?
