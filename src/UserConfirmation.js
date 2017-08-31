@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import glamorous from 'glamorous';
 
 export const getUserConfirmation = (message, callback) => {
   
@@ -23,11 +24,29 @@ export const getUserConfirmation = (message, callback) => {
 }
 
 const UserConfirmation = (props) => 
-  <p className='modal'>
-  {props.message}
-  <button onClick={props.onCancel}>NO</button>
-  <button onClick={props.onConfirm}>SI</button>
-  </p>
+  <Modal className='modal'>
+    {props.message}
+    <button onClick={props.onCancel}>NO</button>
+    <button onClick={props.onConfirm}>SI</button>
+  </Modal>
+
+const Modal = glamorous.div({
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0,0,0,.2)'
+  });
+
+  // const Modal = glamorous(UserConfirmation)({
+  //   position: 'absolute',
+  //   top: 0,
+  //   left: 0,
+  //   width: '100%',
+  //   height: '100%',
+  //   backgroundColor: 'rgba(0,0,0,.2)'
+  // });
 
 
 export default getUserConfirmation;
