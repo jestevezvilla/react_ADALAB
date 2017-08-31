@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Redirect, Route, Link, withRouter } from 'react-router-dom'
+import { Switch, Prompt, Redirect, Route, Link, withRouter } from 'react-router-dom'
 
 //TODO: Importar Promises con namespace
 
@@ -30,11 +30,16 @@ class App extends Component {
     this.state = {location: ''}
   }
   componentDidMount() {
-    
     this.props.history.listen((location) =>{
-      this.setState({location:location.pathname})
+      if(location.pathname !== ''){
+        this.setState({location:location.pathname})
+      }
       }
     );
+  }
+
+  formIsHalfFilledOut(){
+    return true
   }
   
   render(){
@@ -45,25 +50,22 @@ class App extends Component {
                       <li><Link to="/starwars">StarWars</Link></li>
                       <li><Link to="/router">Router</Link></li>
                     </ul>
-                    {
-                      (this.state.location == '/starwars')
-                      ?
-                        (<div><Route path='/board' component={() => <Board store={store} />} />
-                         <Route path='/starwars' component={StarWars} />
-                         <Route path='/router' component={BoardWithRouter} /></div>)
-                      :
-                        (<Redirect to='/router' />)
-                      
-                    }
+                    
+                        <Switch>
+                          {(this.state.location === '/board') ? <Prompt
+                            when={this.formIsHalfFilledOut()}
+                            message="Are you sure you want to leave?" 
+                          /> : null}
+                          <Route path='/board' component={() => <Board store={store} />} />
+                          <Route path='/starwars' component={StarWars} />
+                          <Route path='/router' component={BoardWithRouter} />
+                        </Switch>
                 </div>
               )
   }
 }
 
-const AppWithRouter = withRouter( ({history}) => {
-  
-  return (<App history={history} />)
-})
+const AppWithRouter = withRouter(App);
 
 class Board extends Component {
 

@@ -10,11 +10,20 @@ class StarWars extends Component {
     }
   }
   
-  componentWillMount() {
+  componentDidMount() {
     fetch('https://swapi.co/api/people')
       .then((response) => response.json())
-      .then( ({results: items}) => this.setState({people: items}) );
+      .then( ({results: items}) => this.handlePromise(items));
   }
+
+  handlePromise(people){
+    this.setState({people})
+  }
+
+  componentWillUnmount() {
+    this.handlePromise = () => console.log('unmounted component');
+  }
+  
 
   search(e){
 
