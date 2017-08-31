@@ -9,7 +9,6 @@ class StarWars extends Component {
       filter: ''
     }
   }
-
   
   componentWillMount() {
     fetch('https://swapi.co/api/people')

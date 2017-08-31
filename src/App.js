@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Redirect, Route, Link, withRouter } from 'react-router-dom'
 
 //TODO: Importar Promises con namespace
 
@@ -8,6 +9,7 @@ import Square from './Square';
 import Counter from './Counter';
 import ControlledForm from './ControlledForm';
 import HOC from './HOC';
+import Search from './Search';
 //import {HOC} from './HOC';
 //import * as components from './HOC';
 
@@ -22,12 +24,46 @@ const store = {
   records: [123,12,323,2123]
 }
 
-const App = () => (
-  <div>
-    <Board store={store} />
-    <StarWars />
-  </div>
-);
+class App extends Component {
+  constructor(){
+    super();
+    this.state = {location: ''}
+  }
+  componentDidMount() {
+    
+    this.props.history.listen((location) =>{
+      this.setState({location:location.pathname})
+      }
+    );
+  }
+  
+  render(){
+      return (
+                <div>
+                    <ul>
+                      <li><Link to="/board">Board</Link></li>
+                      <li><Link to="/starwars">StarWars</Link></li>
+                      <li><Link to="/router">Router</Link></li>
+                    </ul>
+                    {
+                      (this.state.location == '/starwars')
+                      ?
+                        (<div><Route path='/board' component={() => <Board store={store} />} />
+                         <Route path='/starwars' component={StarWars} />
+                         <Route path='/router' component={BoardWithRouter} /></div>)
+                      :
+                        (<Redirect to='/router' />)
+                      
+                    }
+                </div>
+              )
+  }
+}
+
+const AppWithRouter = withRouter( ({history}) => {
+  
+  return (<App history={history} />)
+})
 
 class Board extends Component {
 
@@ -93,20 +129,8 @@ class Board extends Component {
 
 }
 
-//TODO: Convertir en funcional
-class Search extends Component {
-  render(){
-    let inputRef;
-    return(<input
-            ref={(inputText) => inputRef = inputText}
-            onChange={()=>this.props.onInputChange(inputRef)} />)
-    // return(<input
-    //         ref='search'
-    //         onChange={()=>this.props.onInputChange(this.refs.search)} />)
-  }
+const BoardWithRouter = withRouter( ({history}) => {
+  return <p>Hi</p>
+})
 
-}
-
-
-
-export default App;
+export default AppWithRouter;

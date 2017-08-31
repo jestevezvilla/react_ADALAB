@@ -11,6 +11,12 @@ class Counter extends Component {
     this.start();
   }
 
+  componentWillUnmount() {
+    clearInterval(this.running);
+    this.running = null;
+  }
+  
+
   start() {
     //let counter = 0
     this.running =
