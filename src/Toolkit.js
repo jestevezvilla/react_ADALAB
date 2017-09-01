@@ -8,10 +8,10 @@ const ModalShorthand = () => (
     trigger={<Button>Show Modal</Button>}
     header='Delete Your Account'
     content='Are you sure you want to delete your account'
-    actions={[
-      { key: 'no', content: 'No', color: 'red', triggerClose: true },
-      { key: 'yes', content: 'Yes', color: 'green', triggerClose: true },
-    ]}
+    // actions={[
+    //   { key: 'no', content: 'No', color: 'red', triggerClose: true },
+    //   { key: 'yes', content: 'Yes', color: 'green', triggerClose: true },
+    // ]}
   />
 )
 
